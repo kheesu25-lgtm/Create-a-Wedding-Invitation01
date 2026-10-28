@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Forever | 참석 완료</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap">
+<style>
+  /* Our Forever 디자인 토큰 (역할 토큰) */
+  :root {
+    --bg-layer-basement: #E0D7CA;
+    --bg-layer-default: #F6F1E9;
+    --bg-layer-floating: #FFFDF9;
+    --bg-brand-solid: #9a6168;
+    --bg-brand-solid-pressed: #7a4f51;
+    --bg-brand-weak: #f3dfdd;
+    --bg-accent-weak: #f8eddb;
+    --bg-neutral-solid: #2D211A;
+    --fg-neutral: #4A3A30;
+    --fg-neutral-subtle: #76675A;
+    --fg-neutral-inverted: #FFFDF9;
+    --fg-brand: #9a6168;
+    --stroke-neutral-muted: #E0D7CA;
+    --stroke-brand-solid: #9a6168;
+    --stroke-focus-ring: #6b726c;
+    --shadow-s3: 0px 4px 16px 0px rgba(74, 45, 30, 0.16);
+    --font-display: "Griun Cherry 1 Spoon", "Apple SD Gothic Neo", sans-serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --font-eyebrow: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
+    --ease: cubic-bezier(0.35, 0, 0.35, 1);
+    --ease-enter-expressive: cubic-bezier(0.03, 0.4, 0.1, 1);
+  }
+  /* 서체 파일이 준비되면 경로를 맞춰 주세요.
+  @font-face { font-family: "Griun Cherry 1 Spoon"; src: url("fonts/Griun_Cherry1Spoon-Rg.ttf") format("truetype"); font-display: swap; }
+  */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg-layer-basement);
+    color: var(--fg-neutral);
+    font-family: var(--font-sans);
+  }
+  button, a { font: inherit; }
+
+  .page { max-width: 430px; margin: 0 auto; }
+  .layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; }
+  .preview { min-width: 0; }
+  .caption { text-align: center; font-size: 13px; color: var(--fg-neutral-subtle); margin: 16px 0 0; }
+
+  /* 화면 */
+  .screen {
+    position: relative; width: 100%; max-width: 390px; min-height: 844px; margin: 0 auto;
+    background: var(--bg-layer-default); padding: 12px;
+  }
+  .card {
+    min-height: 820px; border-radius: 28px; background: var(--bg-layer-floating);
+    padding: 36px 20px 26px; display: flex; flex-direction: column; align-items: center; text-align: center;
+    animation: rise 600ms var(--ease-enter-expressive) both;
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  .eyebrow {
+    margin: 0; font-family: var(--font-eyebrow); font-size: 11px; line-height: 16px; font-weight: 500;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--fg-brand);
+  }
+
+  .arch { position: relative; width: 100%; max-width: 314px; margin-top: 16px; }
+  .arch svg { display: block; width: 100%; height: auto; }
+  .seal {
+    position: absolute; left: 50%; bottom: -27px; transform: translateX(-50%);
+    width: 36px; height: 36px; border-radius: 9999px; background: var(--bg-layer-floating);
+    border: 1px solid var(--stroke-neutral-muted); display: grid; place-items: center; color: var(--fg-brand);
+  }
+
+  .title { margin: 10px 0 0; font-family: var(--font-display); font-size: 27px; line-height: 36px; font-weight: 400; color: var(--fg-neutral); }
+  .lead { margin: 8px 0 0; font-size: 14px; line-height: 24px; color: var(--fg-neutral-subtle); }
+  .status { margin-top: 44px; }
+
+  .rule { width: 220px; max-width: 70%; height: 1px; border: 0; background: var(--stroke-neutral-muted); margin: 52px 0 0; }
+  .not-attending .rule { margin-top: 28px; }
+
+  .date-card {
+    width: 270px; max-width: 100%; height: 64px; margin-top: 20px; border-radius: 14px; background: var(--bg-accent-weak);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  }
+  .date-card .eyebrow { letter-spacing: 1.8px; line-height: 14px; color: var(--fg-neutral-subtle); }
+  .date-card time { font-family: var(--font-display); font-size: 19px; line-height: 24px; color: var(--fg-neutral); }
+  .note { margin: 8px 0 0; font-size: 13px; line-height: 20px; color: var(--fg-neutral-subtle); }
+
+  .actions { width: 100%; max-width: 326px; margin-top: 12px; display: grid; gap: 12px; }
+  .not-attending .actions { margin-top: 40px; }
+  .btn {
+    height: 48px; width: 100%; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    font-size: 14px; line-height: 19px; font-weight: 500; text-decoration: none; cursor: pointer;
+    transition: background-color 150ms var(--ease), transform 150ms var(--ease);
+  }
+  .btn:focus-visible { outline: 2px solid var(--stroke-focus-ring); outline-offset: 2px; }
+  .btn-primary { border: 0; background: var(--bg-brand-solid); color: var(--fg-neutral-inverted); }
+  .btn-primary:active { background: var(--bg-brand-solid-pressed); transform: scale(0.97); }
+  .btn-outline { border: 1.2px solid var(--stroke-brand-solid); background: var(--bg-layer-floating); color: var(--fg-brand); }
+  .btn-outline:active { background: var(--bg-brand-weak); transform: scale(0.97); }
+
+  .footer { margin-top: auto; padding-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .footer .eyebrow { font-size: 9px; line-height: 12px; letter-spacing: 2.5px; color: var(--fg-neutral-subtle); }
+
+  /* 스낵바 */
+  .snackbar {
+    position: fixed; left: 50%; bottom: 56px; z-index: 10; width: calc(100% - 32px); max-width: 358px;
+    transform: translate(-50%, 12px); opacity: 0; pointer-events: none;
+    display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-radius: 12px;
+    background: var(--bg-neutral-solid); color: var(--fg-neutral-inverted); box-shadow: var(--shadow-s3);
+    font-size: 14px; line-height: 19px; transition: opacity 300ms var(--ease), transform 300ms var(--ease);
+  }
+  .snackbar.show { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (max-width: 760px) {
+    .page { padding: 0 0 40px; }
+    .layout { grid-template-columns: 1fr; gap: 0; }
+    .caption { margin: 8px 0 24px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card { animation: none; }
+    .btn, .snackbar { transition: none; }
+    .btn:active { transform: none; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+      <div class="screen attending">
+        <div class="card">
+          <p class="eyebrow">Our Forever</p>
+
+          <div class="arch">
+            <svg viewBox="38 68 314 234" aria-hidden="true">
+              <defs>
+                <clipPath id="attArch"><path d="M38 302 V225 A157 157 0 0 1 352 225 V302 Z"/></clipPath>
+                <linearGradient id="attArchBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f3dfdd"/><stop offset="100%" stop-color="#f8eddb"/></linearGradient>
+              </defs>
+              <path d="M38 302 V225 A157 157 0 0 1 352 225 V302 Z" fill="url(#attArchBg)"/>
+              <g clip-path="url(#attArch)">
+                <circle cx="195" cy="168" r="112" fill="#f8eddb" opacity=".85"/>
+                <circle cx="195" cy="168" r="78" fill="#FFFDF9" opacity=".45"/>
+                <g>
+                  <circle cx="92" cy="150" r="3" fill="#d8a5aa"/>
+                  <circle cx="300" cy="142" r="3" fill="#E7CB9B"/>
+                  <circle cx="122" cy="112" r="2" fill="#9A9D5C"/>
+                  <circle cx="270" cy="104" r="2.5" fill="#d8a5aa"/>
+                  <circle cx="160" cy="92" r="2" fill="#c8ad84"/>
+                  <circle cx="236" cy="88" r="2" fill="#a4afaa"/>
+                  <circle cx="80" cy="204" r="2.5" fill="#E7CB9B"/>
+                  <circle cx="312" cy="198" r="2.5" fill="#9A9D5C"/>
+                  <path d="M140 132 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" fill="#E7CB9B"/>
+                  <path d="M254 150 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5z" fill="#d8a5aa"/>
+                </g>
+                <g stroke-linecap="round" stroke-linejoin="round">
+                  <g transform="translate(185 130) rotate(-12)">
+                    <path d="M-10 0 C-10 30 -6 44 0 48 C6 44 10 30 10 0 Z" fill="#FFFDF9" stroke="#aa916f" stroke-width="1.2"/>
+                    <path d="M-9 12 C-9 32 -5 43 0 46 C5 43 9 32 9 12 Z" fill="#E7CB9B" opacity=".85"/>
+                    <circle cx="-3" cy="24" r="1.2" fill="#FFFDF9"/><circle cx="2" cy="33" r="1" fill="#FFFDF9"/>
+                    <path d="M0 48 V78 M-10 80 Q0 76 10 80" fill="none" stroke="#aa916f" stroke-width="1.2"/>
+                  </g>
+                  <g transform="translate(205 130) rotate(12)">
+                    <path d="M-10 0 C-10 30 -6 44 0 48 C6 44 10 30 10 0 Z" fill="#FFFDF9" stroke="#aa916f" stroke-width="1.2"/>
+                    <path d="M-9 12 C-9 32 -5 43 0 46 C5 43 9 32 9 12 Z" fill="#E7CB9B" opacity=".85"/>
+                    <circle cx="3" cy="22" r="1.2" fill="#FFFDF9"/><circle cx="-2" cy="31" r="1" fill="#FFFDF9"/>
+                    <path d="M0 48 V78 M-10 80 Q0 76 10 80" fill="none" stroke="#aa916f" stroke-width="1.2"/>
+                  </g>
+                  <path d="M195 102 L197 109 L204 111 L197 113 L195 120 L193 113 L186 111 L193 109 Z" fill="#c8ad84"/>
+                  <path d="M181 118 L176 112 M209 118 L214 112 M195 98 V94" fill="none" stroke="#c8ad84" stroke-width="1.2"/>
+                </g>
+                <g stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M58 302 C78 270 100 250 130 236" fill="none" stroke="#7E8F89" stroke-width="2"/>
+                  <path d="M84 268 C66 264 60 250 64 240 C78 246 86 256 84 268Z" fill="#ccd1cb" stroke="#7E8F89" stroke-width="1"/>
+                  <path d="M104 250 C108 234 122 228 132 230 C128 244 118 252 104 250Z" fill="#e7e5d3" stroke="#9A9D5C" stroke-width="1"/>
+                  <path d="M72 290 C56 290 48 278 50 268 C64 270 72 280 72 290Z" fill="#d7d7bb" stroke="#9A9D5C" stroke-width="1"/>
+                </g>
+                <g transform="translate(390 0) scale(-1 1)" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M58 302 C78 270 100 250 130 236" fill="none" stroke="#7E8F89" stroke-width="2"/>
+                  <path d="M84 268 C66 264 60 250 64 240 C78 246 86 256 84 268Z" fill="#ccd1cb" stroke="#7E8F89" stroke-width="1"/>
+                  <path d="M104 250 C108 234 122 228 132 230 C128 244 118 252 104 250Z" fill="#e7e5d3" stroke="#9A9D5C" stroke-width="1"/>
+                  <path d="M72 290 C56 290 48 278 50 268 C64 270 72 280 72 290Z" fill="#d7d7bb" stroke="#9A9D5C" stroke-width="1"/>
+                </g>
+                <g stroke-linejoin="round">
+                  <g transform="translate(150 266)">
+                    <path d="M0 0 C-11 -9 -10 -22 0 -30 C9 -19 9 -8 0 0Z" fill="#d8a5aa" stroke="#9a6168" stroke-width="1"/>
+                    <path d="M0 0 C11 -9 23 -5 26 6 C13 11 5 8 0 0Z" fill="#eacbcc" stroke="#9a6168" stroke-width="1"/>
+                    <path d="M0 0 C-3 14 -16 19 -25 10 C-19 -2 -10 -5 0 0Z" fill="#f3dfdd" stroke="#9a6168" stroke-width="1"/>
+                    <circle r="5" fill="#c8ad84"/>
+                  </g>
+                  <g transform="translate(242 264)">
+                    <path d="M0 0 C-9 -9 -7 -22 3 -28 C12 -17 10 -7 0 0Z" fill="#e7cb9b" stroke="#aa916f" stroke-width="1"/>
+                    <path d="M0 0 C13 -5 23 3 21 15 C8 16 1 9 0 0Z" fill="#f2e1c6" stroke="#aa916f" stroke-width="1"/>
+                    <path d="M0 0 C-12 6 -23 -2 -20 -14 C-7 -16 -1 -9 0 0Z" fill="#f8eddb" stroke="#aa916f" stroke-width="1"/>
+                    <circle r="4.5" fill="#aa916f"/>
+                  </g>
+                  <g transform="translate(196 284) scale(.8)">
+                    <path d="M0 0 C-11 -9 -10 -22 0 -30 C9 -19 9 -8 0 0Z" fill="#C4808A" stroke="#9a6168" stroke-width="1"/>
+                    <path d="M0 0 C11 -9 23 -5 26 6 C13 11 5 8 0 0Z" fill="#d8a5aa" stroke="#9a6168" stroke-width="1"/>
+                    <path d="M0 0 C-3 14 -16 19 -25 10 C-19 -2 -10 -5 0 0Z" fill="#eacbcc" stroke="#9a6168" stroke-width="1"/>
+                    <circle r="5" fill="#c8ad84"/>
+                  </g>
+                </g>
+              </g>
+              <path d="M38 302 V225 A157 157 0 0 1 352 225 V302" fill="none" stroke="#E0D7CA" stroke-width="1"/>
+            </svg>
+            <div class="seal" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10z"/></svg>
+            </div>
+          </div>
+
+          <p class="eyebrow status">Attending</p>
+          <h1 class="title">함께해 주셔서 기뻐요</h1>
+          <p class="lead">소중한 날을 함께 축하할 수 있어<br>정말 기쁩니다.</p>
+
+          <hr class="rule">
+          <div class="date-card">
+            <p class="eyebrow">Wedding Day</p>
+            <time datetime="2026-12-12T13:00">2026. 12. 12. SAT · 1:00 PM</time>
+          </div>
+          <p class="note">그날 반가운 얼굴로 만나요.</p>
+
+          <div class="actions">
+            <button type="button" class="btn btn-primary" data-message="예식 장소 안내를 열었어요.">
+              예식 장소 보기
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </button>
+            <button type="button" class="btn btn-outline" data-message="캘린더에 12월 12일 일정을 추가했어요.">캘린더에 일정 추가</button>
+          </div>
+
+          <div class="footer">
+            <svg width="32" height="12" viewBox="179 770 32 12" aria-hidden="true"><path d="M180 779 C185 772 191 772 195 780 C199 772 205 772 210 779" fill="none" stroke="#9a6168" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <p class="eyebrow">Made with love</p>
+          </div>
+        </div>
+      </div>
+    
+</main>
+
+<div class="snackbar" id="snackbar" role="status" aria-live="polite">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+  <span id="snackbar-text"></span>
+</div>
+
+<script>
+  // 버튼 동작 자리: 실제 지도·캘린더·첫 화면 링크로 바꿔 연결하세요.
+  const snackbar = document.getElementById('snackbar');
+  const snackText = document.getElementById('snackbar-text');
+  let timer;
+  document.querySelectorAll('[data-message]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      if (el.getAttribute('href') === '#') e.preventDefault();
+      snackText.textContent = el.dataset.message;
+      snackbar.classList.add('show');
+      clearTimeout(timer);
+      timer = setTimeout(() => snackbar.classList.remove('show'), 3000);
+    });
+  });
+</script>
+</body>
+</html>

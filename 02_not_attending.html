@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Forever | 불참 완료</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap">
+<style>
+  /* Our Forever 디자인 토큰 (역할 토큰) */
+  :root {
+    --bg-layer-basement: #E0D7CA;
+    --bg-layer-default: #F6F1E9;
+    --bg-layer-floating: #FFFDF9;
+    --bg-brand-solid: #9a6168;
+    --bg-brand-solid-pressed: #7a4f51;
+    --bg-brand-weak: #f3dfdd;
+    --bg-accent-weak: #f8eddb;
+    --bg-neutral-solid: #2D211A;
+    --fg-neutral: #4A3A30;
+    --fg-neutral-subtle: #76675A;
+    --fg-neutral-inverted: #FFFDF9;
+    --fg-brand: #9a6168;
+    --stroke-neutral-muted: #E0D7CA;
+    --stroke-brand-solid: #9a6168;
+    --stroke-focus-ring: #6b726c;
+    --shadow-s3: 0px 4px 16px 0px rgba(74, 45, 30, 0.16);
+    --font-display: "Griun Cherry 1 Spoon", "Apple SD Gothic Neo", sans-serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --font-eyebrow: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
+    --ease: cubic-bezier(0.35, 0, 0.35, 1);
+    --ease-enter-expressive: cubic-bezier(0.03, 0.4, 0.1, 1);
+  }
+  /* 서체 파일이 준비되면 경로를 맞춰 주세요.
+  @font-face { font-family: "Griun Cherry 1 Spoon"; src: url("fonts/Griun_Cherry1Spoon-Rg.ttf") format("truetype"); font-display: swap; }
+  */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg-layer-basement);
+    color: var(--fg-neutral);
+    font-family: var(--font-sans);
+  }
+  button, a { font: inherit; }
+
+  .page { max-width: 430px; margin: 0 auto; }
+  .layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; }
+  .preview { min-width: 0; }
+  .caption { text-align: center; font-size: 13px; color: var(--fg-neutral-subtle); margin: 16px 0 0; }
+
+  /* 화면 */
+  .screen {
+    position: relative; width: 100%; max-width: 390px; min-height: 844px; margin: 0 auto;
+    background: var(--bg-layer-default); padding: 12px;
+  }
+  .card {
+    min-height: 820px; border-radius: 28px; background: var(--bg-layer-floating);
+    padding: 36px 20px 26px; display: flex; flex-direction: column; align-items: center; text-align: center;
+    animation: rise 600ms var(--ease-enter-expressive) both;
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  .eyebrow {
+    margin: 0; font-family: var(--font-eyebrow); font-size: 11px; line-height: 16px; font-weight: 500;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--fg-brand);
+  }
+
+  .arch { position: relative; width: 100%; max-width: 314px; margin-top: 16px; }
+  .arch svg { display: block; width: 100%; height: auto; }
+  .seal {
+    position: absolute; left: 50%; bottom: -27px; transform: translateX(-50%);
+    width: 36px; height: 36px; border-radius: 9999px; background: var(--bg-layer-floating);
+    border: 1px solid var(--stroke-neutral-muted); display: grid; place-items: center; color: var(--fg-brand);
+  }
+
+  .title { margin: 10px 0 0; font-family: var(--font-display); font-size: 27px; line-height: 36px; font-weight: 400; color: var(--fg-neutral); }
+  .lead { margin: 8px 0 0; font-size: 14px; line-height: 24px; color: var(--fg-neutral-subtle); }
+  .status { margin-top: 44px; }
+
+  .rule { width: 220px; max-width: 70%; height: 1px; border: 0; background: var(--stroke-neutral-muted); margin: 52px 0 0; }
+  .not-attending .rule { margin-top: 28px; }
+
+  .date-card {
+    width: 270px; max-width: 100%; height: 64px; margin-top: 20px; border-radius: 14px; background: var(--bg-accent-weak);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  }
+  .date-card .eyebrow { letter-spacing: 1.8px; line-height: 14px; color: var(--fg-neutral-subtle); }
+  .date-card time { font-family: var(--font-display); font-size: 19px; line-height: 24px; color: var(--fg-neutral); }
+  .note { margin: 8px 0 0; font-size: 13px; line-height: 20px; color: var(--fg-neutral-subtle); }
+
+  .actions { width: 100%; max-width: 326px; margin-top: 12px; display: grid; gap: 12px; }
+  .not-attending .actions { margin-top: 40px; }
+  .btn {
+    height: 48px; width: 100%; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    font-size: 14px; line-height: 19px; font-weight: 500; text-decoration: none; cursor: pointer;
+    transition: background-color 150ms var(--ease), transform 150ms var(--ease);
+  }
+  .btn:focus-visible { outline: 2px solid var(--stroke-focus-ring); outline-offset: 2px; }
+  .btn-primary { border: 0; background: var(--bg-brand-solid); color: var(--fg-neutral-inverted); }
+  .btn-primary:active { background: var(--bg-brand-solid-pressed); transform: scale(0.97); }
+  .btn-outline { border: 1.2px solid var(--stroke-brand-solid); background: var(--bg-layer-floating); color: var(--fg-brand); }
+  .btn-outline:active { background: var(--bg-brand-weak); transform: scale(0.97); }
+
+  .footer { margin-top: auto; padding-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .footer .eyebrow { font-size: 9px; line-height: 12px; letter-spacing: 2.5px; color: var(--fg-neutral-subtle); }
+
+  /* 스낵바 */
+  .snackbar {
+    position: fixed; left: 50%; bottom: 56px; z-index: 10; width: calc(100% - 32px); max-width: 358px;
+    transform: translate(-50%, 12px); opacity: 0; pointer-events: none;
+    display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-radius: 12px;
+    background: var(--bg-neutral-solid); color: var(--fg-neutral-inverted); box-shadow: var(--shadow-s3);
+    font-size: 14px; line-height: 19px; transition: opacity 300ms var(--ease), transform 300ms var(--ease);
+  }
+  .snackbar.show { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (max-width: 760px) {
+    .page { padding: 0 0 40px; }
+    .layout { grid-template-columns: 1fr; gap: 0; }
+    .caption { margin: 8px 0 24px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card { animation: none; }
+    .btn, .snackbar { transition: none; }
+    .btn:active { transform: none; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+      <div class="screen not-attending">
+        <div class="card">
+          <p class="eyebrow">Our Forever</p>
+
+          <div class="arch">
+            <svg viewBox="38 68 314 234" aria-hidden="true">
+              <defs>
+                <clipPath id="notArch"><path d="M38 302 V225 A157 157 0 0 1 352 225 V302 Z"/></clipPath>
+                <linearGradient id="notArchBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e1e2dc"/><stop offset="100%" stop-color="#f8eddb"/></linearGradient>
+              </defs>
+              <path d="M38 302 V225 A157 157 0 0 1 352 225 V302 Z" fill="url(#notArchBg)"/>
+              <g clip-path="url(#notArch)">
+                <circle cx="195" cy="200" r="118" fill="#FFFDF9" opacity=".45"/>
+                <circle cx="96" cy="250" r="54" fill="#e1e2dc" opacity=".7"/>
+                <circle cx="300" cy="238" r="58" fill="#EDE6DB" opacity=".8"/>
+                <g stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M154 184 C142 158 128 130 112 104" fill="none" stroke="#7E8F89" stroke-width="1.8"/>
+                  <ellipse cx="148" cy="166" rx="8" ry="6" transform="rotate(-30 148 166)" fill="#ccd1cb" stroke="#7E8F89" stroke-width="1"/>
+                  <ellipse cx="132" cy="150" rx="8" ry="6" transform="rotate(40 132 150)" fill="#e1e2dc" stroke="#7E8F89" stroke-width="1"/>
+                  <ellipse cx="132" cy="130" rx="7.5" ry="5.5" transform="rotate(-35 132 130)" fill="#ccd1cb" stroke="#7E8F89" stroke-width="1"/>
+                  <ellipse cx="114" cy="122" rx="7" ry="5" transform="rotate(35 114 122)" fill="#e1e2dc" stroke="#7E8F89" stroke-width="1"/>
+                  <ellipse cx="112" cy="102" rx="6" ry="4.5" transform="rotate(-50 112 102)" fill="#ccd1cb" stroke="#7E8F89" stroke-width="1"/>
+                  <path d="M236 184 C244 160 254 140 264 124" fill="none" stroke="#9A9D5C" stroke-width="1.8"/>
+                  <path d="M248 154 C262 148 270 154 272 162 C260 166 252 162 248 154Z" fill="#d7d7bb" stroke="#9A9D5C" stroke-width="1"/>
+                  <g transform="translate(264 122)">
+                    <path d="M0 0 C-9 -6 -9 -18 0 -24 C9 -18 9 -6 0 0Z" fill="#d8a5aa" stroke="#9a6168" stroke-width="1"/>
+                    <path d="M0 0 C10 -6 20 -2 21 8 C11 11 4 8 0 0Z" fill="#eacbcc" stroke="#9a6168" stroke-width="1"/>
+                    <path d="M0 0 C-4 10 -15 13 -21 6 C-15 -3 -7 -4 0 0Z" fill="#f3dfdd" stroke="#9a6168" stroke-width="1"/>
+                    <circle r="4" fill="#c8ad84"/>
+                  </g>
+                  <g transform="rotate(-4 195 222)">
+                    <rect x="120" y="176" width="150" height="96" rx="6" fill="#FFFDF9" stroke="#CFC4B5" stroke-width="1.2"/>
+                    <path d="M120 272 L178 222 M270 272 L212 222" fill="none" stroke="#E0D7CA" stroke-width="1.2"/>
+                    <path d="M121 177 L195 228 L269 177" fill="#f8eddb" stroke="#CFC4B5" stroke-width="1.2"/>
+                    <circle cx="195" cy="228" r="13" fill="#9a6168"/>
+                    <circle cx="195" cy="228" r="9.5" fill="none" stroke="#C4808A" stroke-width="1"/>
+                    <path d="M195 233 s-5 -3 -5 -6.5 a2.6 2.6 0 0 1 5 -1.4 a2.6 2.6 0 0 1 5 1.4 c0 3.5 -5 6.5 -5 6.5z" fill="none" stroke="#f3dfdd" stroke-width="1.2"/>
+                  </g>
+                  <path d="M296 118 s-6 -3.6 -6 -8 a3.2 3.2 0 0 1 6 -1.6 a3.2 3.2 0 0 1 6 1.6 c0 4.4 -6 8 -6 8z" fill="none" stroke="#C4808A" stroke-width="1.2"/>
+                  <path d="M314 96 s-4 -2.4 -4 -5.4 a2.2 2.2 0 0 1 4 -1 a2.2 2.2 0 0 1 4 1 c0 3 -4 5.4 -4 5.4z" fill="none" stroke="#d8a5aa" stroke-width="1"/>
+                  <circle cx="88" cy="196" r="2.5" fill="#E7CB9B"/>
+                  <circle cx="306" cy="206" r="2" fill="#a4afaa"/>
+                  <circle cx="168" cy="96" r="2" fill="#c8ad84"/>
+                </g>
+              </g>
+              <path d="M38 302 V225 A157 157 0 0 1 352 225 V302" fill="none" stroke="#E0D7CA" stroke-width="1"/>
+            </svg>
+            <div class="seal" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 10c-2-3-1-6 0-7 1 1 2 4 0 7zM14 12c3-2 6-1 7 0-1 1-4 2-7 0zM12 14c2 3 1 6 0 7-1-1-2-4 0-7zM10 12c-3 2-6 1-7 0 1-1 4-2 7 0z"/></svg>
+            </div>
+          </div>
+
+          <p class="eyebrow status">With love &amp; gratitude</p>
+          <h1 class="title">마음 보내주셔서 감사해요</h1>
+          <p class="lead">함께하지 못하더라도<br>저희의 새로운 시작을 축하해 주시는<br>마음에 감사드립니다.</p>
+
+          <hr class="rule">
+          <div class="date-card">
+            <p class="eyebrow">Wedding Day</p>
+            <time datetime="2026-12-12T13:00">2026. 12. 12. SAT · 1:00 PM</time>
+          </div>
+          <p class="note">늘 건강하고 행복한 날들이 함께하길 바랍니다.</p>
+
+          <div class="actions">
+            <a class="btn btn-outline" href="#" data-message="청첩장 첫 화면으로 돌아가요.">
+              청첩장으로 돌아가기
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+            </a>
+          </div>
+
+          <div class="footer">
+            <svg width="32" height="12" viewBox="179 770 32 12" aria-hidden="true"><path d="M180 779 C185 772 191 772 195 780 C199 772 205 772 210 779" fill="none" stroke="#9a6168" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <p class="eyebrow">Made with love</p>
+          </div>
+        </div>
+      </div>
+    
+</main>
+
+<div class="snackbar" id="snackbar" role="status" aria-live="polite">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+  <span id="snackbar-text"></span>
+</div>
+
+<script>
+  // 버튼 동작 자리: 실제 지도·캘린더·첫 화면 링크로 바꿔 연결하세요.
+  const snackbar = document.getElementById('snackbar');
+  const snackText = document.getElementById('snackbar-text');
+  let timer;
+  document.querySelectorAll('[data-message]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      if (el.getAttribute('href') === '#') e.preventDefault();
+      snackText.textContent = el.dataset.message;
+      snackbar.classList.add('show');
+      clearTimeout(timer);
+      timer = setTimeout(() => snackbar.classList.remove('show'), 3000);
+    });
+  });
+</script>
+</body>
+</html>
