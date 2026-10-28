@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#F6F1E9"><meta name="description" content="작은 조각을 모아 완성하는 우리의 청첩장"><title>Our Forever · 우리라는 초대</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="journey.css"></head><body>
+<main>
+<section id="start-screen" class="journey-screen"><h1 class="wedding-title">wedding</h1><button class="primary journey-button" id="start-game">START</button></section>
+
+<div id="game-screen" hidden>
+<header><a href="#" class="wordmark">our forever<span>작은 조각으로 전하는, 우리의 시작</span></a><button class="icon" id="settings" aria-label="예식 정보 바꾸기">✎</button></header>
+<nav aria-label="진행 상황"><a href="#invitation"><b id="step0">01</b> 초대장</a><span></span><a href="#memories"><b id="step1">02</b> 우리의 추억</a><span></span><a href="#route"><b id="step2">03</b> 오시는 길</a></nav>
+<section id="invitation"><div class="section-head"><span class="eyebrow">THE INVITATION</span><h2><small>01</small> 초대장 채우기</h2><p>아래 조각을 골라, 알맞은 빈칸에 넣어 주세요.</p></div>
+<div class="envelope"><div class="letter"><span class="tiny-heart">♡</span><p class="letter-intro">당신을 우리의 시작에 초대합니다</p><div class="slots"><div><label>이름</label><button class="slot" data-slot="0">이름 조각을 넣어 주세요</button></div><div><label>일시</label><button class="slot" data-slot="1">날짜 조각을 넣어 주세요</button></div><div><label>장소</label><button class="slot" data-slot="2">장소 조각을 넣어 주세요</button></div></div><p class="letter-end">함께해 주시면 더없이 기쁘겠습니다.</p></div><div class="flap"></div><span class="seal">♡</span></div>
+<div id="pieces" class="pieces"></div><p id="invite-status" class="status" aria-live="polite">조각을 먼저 고른 뒤, 빈칸을 눌러 주세요.</p></section>
+<div class="divider">✧</div>
+<section id="memories"><div class="section-head"><span class="eyebrow">PIECES OF US</span><h2><small>02</small> 추억 맞추기</h2><p>우리가 함께한 순간을 제자리에 놓아 주세요.</p></div><div class="polaroids" id="frames"></div><div class="photo-tray" id="photos"></div><p class="status" id="memory-status" aria-live="polite">사진을 고른 뒤, 어울리는 액자를 눌러 주세요.</p><label class="upload">나만의 사진으로 바꾸기 <input id="upload" type="file" accept="image/*" multiple hidden></label></section>
+<div class="divider">✧</div>
+<section id="route"><div class="section-head"><span class="eyebrow">THE WAY TO OUR DAY</span><h2><small>03</small> 오시는 길 퍼즐</h2><p>출발점을 잡고 예식장까지 드래그해 주세요.</p></div><div class="map"><div class="map-top"><span>우리의 길이 만나는 곳</span><span>예시 약도</span></div><div class="map-land"><div class="building b1"></div><div class="building b2"></div><div class="building b3"></div><div class="building venue">♡<br><span class="venue-name">가든 웨딩홀</span></div><span class="tree t1">♧</span><span class="tree t2">♧</span><span class="tree t3">♧</span><div class="road horizontal"></div><div class="road vertical"></div><div class="route-grid" id="route-grid"></div><span class="station">○<br>가든역 1번 출구</span><span class="parking">P · 주차장</span></div></div><p class="status" id="route-status" aria-live="polite">출발점을 누른 채 점선을 따라 예식장까지 이어 주세요.</p><button class="text-button" id="reset-route">길 다시 그리기 ↺</button></section>
+<section class="closing"><span class="eyebrow">WE WOULD LOVE TO SEE YOU</span><h2>같은 계절, 같은 마음으로</h2><p>서로의 계절을 지나<br>이제 같은 길을 걷기로 했습니다.<br>우리의 첫걸음에 함께해 주세요.</p><span class="tiny-heart">♡</span><h3 id="couple">서준 · 지은</h3><div class="event-date">2026년 11월 21일 토요일 · 오후 1시</div><p><span class="venue-name">가든 웨딩홀</span> · 2층 가든홀<br><span id="address">서울시 중구 정동길 21 (예시)</span></p><button class="text-button" id="copy-address">주소 복사하기 ↗</button><div class="rsvp-buttons"><button class="primary" data-rsvp="yes">♡ 함께 참석할게요</button><button data-rsvp="no">마음으로 축하할게요</button></div><p class="local-note">예시 청첩장입니다. 참석 의사는 이 기기에만 저장됩니다.</p></section>
+<div class="ceremony-entry"><p id="journey-status" aria-live="polite"></p><button class="primary" id="enter-ceremony" disabled>완료하기 →</button></div><footer><span>our forever</span><p>작은 조각들이 모여, 영원이 되는 순간</p><button id="restart" class="text-button">처음부터 다시 즐기기</button></footer>
+</div>
+<section id="ending-screen" class="journey-screen" hidden><button class="primary journey-button" id="return-start">시작 화면으로 돌아가기</button></section>
+
+</main><div id="toast" role="status"></div>
+<dialog id="sheet"><form id="sheet-form"><div class="handle"></div><button type="button" class="close" aria-label="닫기">×</button><div id="sheet-content"></div></form></dialog><script src="app.js"></script><script src="journey.js"></script></body></html>
